@@ -1,0 +1,47 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "CSVPL",
+  "scopeName": "source.csvpl",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#string-double" },
+    { "include": "#string-single" },
+    { "include": "#command" },
+    { "include": "#pe" },
+    { "include": "#flag" }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.line.number-sign.csvpl",
+      "match": "#.*$"
+    },
+    "string-double": {
+      "name": "string.quoted.double.csvpl",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "name": "constant.character.escape.csvpl", "match": "\\\\." }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.csvpl",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        { "name": "constant.character.escape.csvpl", "match": "\\\\." }
+      ]
+    },
+    "command": {
+      "name": "keyword.control.csvpl",
+      "match": "\\b(TrainLinearRegression|TrainLogisticRegression|EvaluateRegression|ApplyRegression|PrintRegression|PlotData|PlotLinearRegression)\\b"
+    },
+    "pe": {
+      "name": "keyword.other.pe.csvpl",
+      "match": "\\b(AddX2|AddX3|AverageCell|Dummy|EncodeTextAsFrequency|EncodeValueAsOneHot|Partition|ProjectColumns|RemoveColumn|RemoveOversizedRows|SelectEquals|Shuffle|SwapColumns)\\b"
+    },
+    "flag": {
+      "name": "variable.parameter.flag.csvpl",
+      "match": "-\\w+"
+    }
+  }
+}

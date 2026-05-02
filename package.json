@@ -1,0 +1,63 @@
+{
+  "name": "csvpl-vscode",
+  "displayName": "CSVPL",
+  "description": "CSVPL language support via LSP",
+  "version": "0.0.1",
+  "publisher": "larrycaw",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/larrycaw/csvpl-vscode"
+  },
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": ["Programming Languages"],
+  "activationEvents": ["onLanguage:csvpl"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "csvpl",
+        "aliases": ["CSVPL", "csvpl"],
+        "extensions": [".csvpl"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "csvpl",
+        "scopeName": "source.csvpl",
+        "path": "./syntaxes/csvpl.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "CSVPL",
+      "properties": {
+        "csvpl.serverJar": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the CSVPL language server JAR file. Configure this setting to point to a valid JAR on your system."
+        },
+        "csvpl.javaPath": {
+          "type": "string",
+          "default": "java",
+          "description": "Path to the Java executable used to launch the language server."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.82.0",
+    "typescript": "^5.0.0"
+  }
+}
