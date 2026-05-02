@@ -1,4 +1,3 @@
-import * as path from "path";
 import * as vscode from "vscode";
 import {
   LanguageClient,
@@ -6,15 +5,19 @@ import {
   ServerOptions,
 } from "vscode-languageclient/node";
 
-let client: LanguageClient;
+let client: LanguageClient | undefined;
 
 export function activate(context: vscode.ExtensionContext): void {
   const config = vscode.workspace.getConfiguration("csvpl");
-  const serverJar = config.get<string>(
-    "serverJar",
-    "C:\\dev\\csvpl-lsp\\target\\csvpl-lsp-1.0-SNAPSHOT.jar"
-  );
+  const serverJar = config.get<string>("serverJar", "");
   const javaPath = config.get<string>("javaPath", "java");
+
+  if (!serverJar) {
+    vscode.window.showErrorMessage(
+      'CSVPL: No language server JAR configured. Please set "csvpl.serverJar" in your settings to enable language features.'
+    );
+    return;
+  }
 
   const serverOptions: ServerOptions = {
     command: javaPath,

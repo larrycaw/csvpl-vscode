@@ -10,7 +10,7 @@
     "url": "https://github.com/larrycaw/csvpl-vscode"
   },
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.82.0"
   },
   "categories": ["Programming Languages"],
   "activationEvents": ["onLanguage:csvpl"],
@@ -36,8 +36,8 @@
       "properties": {
         "csvpl.serverJar": {
           "type": "string",
-          "default": "C:\\dev\\csvpl-lsp\\target\\csvpl-lsp-1.0-SNAPSHOT.jar",
-          "description": "Path to the CSVPL language server JAR file."
+          "default": "",
+          "description": "Path to the CSVPL language server JAR file. Configure this setting to point to a valid JAR on your system."
         },
         "csvpl.javaPath": {
           "type": "string",
@@ -49,14 +49,15 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
   },
   "dependencies": {
     "vscode-languageclient": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@types/vscode": "^1.80.0",
+    "@types/vscode": "^1.82.0",
     "typescript": "^5.0.0"
   }
 }
